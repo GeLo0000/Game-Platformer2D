@@ -9,6 +9,7 @@ public class PlayerMovement2D : MonoBehaviour
 
     public Transform groundCheck;
     public LayerMask whatIsGround;
+    public Animator animator;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -22,7 +23,14 @@ public class PlayerMovement2D : MonoBehaviour
     void Update()
     {
         float moveInput = Input.GetAxis("Horizontal");
+        Movement(moveInput);
+    }
+
+    void Movement(float moveInput)
+    {
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
 
         if (moveInput > 0 && !facingRight || moveInput < 0 && facingRight)
         {
@@ -32,11 +40,8 @@ public class PlayerMovement2D : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            animator.SetBool("IsJumping", true);
         }
-
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, whatIsGround);
-
-        GetComponent<Animator>().SetFloat("Speed", Mathf.Abs(moveInput));
     }
 
     void Flip()
@@ -46,5 +51,21 @@ public class PlayerMovement2D : MonoBehaviour
         Vector3 scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
+    }
+    void OnCollisionEnter2D()
+    {
+        if (Physics2D.OverlapCircle(groundCheck.position, 0.1f, whatIsGround))
+        {
+            isGrounded = true;
+            animator.SetBool("IsJumping", false);
+        }
+    }
+
+    void OnCollisionExit2D()
+    {
+        if (!Physics2D.OverlapCircle(groundCheck.position, 0.1f, whatIsGround))
+        {
+            isGrounded = false;
+        }
     }
 }
