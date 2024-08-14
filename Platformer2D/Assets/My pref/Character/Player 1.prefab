@@ -191,6 +191,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   animator: {fileID: 5465510326276754733}
+  coinManager: {fileID: 0}
+  keysManager: {fileID: 0}
 --- !u!1 &7584702246003297400
 GameObject:
   m_ObjectHideFlags: 0

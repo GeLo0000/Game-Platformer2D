@@ -10,6 +10,8 @@ public class PlayerMovement2D : MonoBehaviour
     public Transform groundCheck;
     public LayerMask whatIsGround;
     public Animator animator;
+    public CoinManager coinManager;
+    public KeysManager keysManager;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -61,6 +63,21 @@ public class PlayerMovement2D : MonoBehaviour
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+            collision.gameObject.SetActive(false);
+        }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Coin"))
+        {
+            coinManager.AddCoins(1);
+            collision.gameObject.SetActive(false);
+        }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("SilverKey"))
+        {
+            keysManager.AddSilverKey(1);
+            collision.gameObject.SetActive(false);
+        }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("GoldKey"))
+        {
+            keysManager.AddGoldKey(1);
             collision.gameObject.SetActive(false);
         }
     }

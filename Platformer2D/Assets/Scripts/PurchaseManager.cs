@@ -5,7 +5,7 @@ using UnityEngine;
 public class PurchaseManager : MonoBehaviour
 {
     public GameObject lockObject;
-    public GameObject Button2;
+    public GameObject ButtonForOpen;
     public GameObject purchaseButton;
     public CoinManager coinManager;
 
@@ -19,7 +19,7 @@ public class PurchaseManager : MonoBehaviour
         {
             lockObject.SetActive(false);
             purchaseButton.SetActive(false);
-            Button2.SetActive(true);
+            ButtonForOpen.SetActive(true);
         }
     }
 
@@ -29,7 +29,7 @@ public class PurchaseManager : MonoBehaviour
         {
             lockObject.SetActive(false);
             purchaseButton.SetActive(false);
-            Button2.SetActive(true);
+            ButtonForOpen.SetActive(true);
             PlayerPrefs.SetInt("IsCharacterPurchased", 1);
             PlayerPrefs.Save();
             coinManager.SpendCoins(9);
