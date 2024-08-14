@@ -61,7 +61,6 @@ public class PlayerMovement2D : MonoBehaviour
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            Debug.Log("Player touched the slime!");
             collision.gameObject.SetActive(false);
         }
     }
