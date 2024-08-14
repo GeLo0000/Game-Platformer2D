@@ -11,13 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map Menu.unity
     guid: 4735c0136e8e8f64cb208b5b929eeac9
-  - enabled: 1
-    path: Assets/Scenes/Lvl Menu First.unity
-    guid: 92cacc384f4deb34f8c5bd8200081361
-  - enabled: 1
-    path: Assets/Scenes/Lvl Menu Red.unity
-    guid: f8a85977c354f4248b1cdba38d45f26c
-  - enabled: 1
-    path: Assets/Scenes/Start Menu 1.unity
-    guid: 8abede5f8dbb4714faedfc4d2594e372
   m_configObjects: {}

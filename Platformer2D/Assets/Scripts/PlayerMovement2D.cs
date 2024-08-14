@@ -52,12 +52,17 @@ public class PlayerMovement2D : MonoBehaviour
         scaler.x *= -1;
         transform.localScale = scaler;
     }
-    void OnCollisionEnter2D()
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (Physics2D.OverlapCircle(groundCheck.position, 0.1f, whatIsGround))
         {
             isGrounded = true;
             animator.SetBool("IsJumping", false);
+        }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Debug.Log("Player touched the slime!");
+            collision.gameObject.SetActive(false);
         }
     }
 
