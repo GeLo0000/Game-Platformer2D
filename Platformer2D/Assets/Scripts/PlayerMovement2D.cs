@@ -12,6 +12,7 @@ public class PlayerMovement2D : MonoBehaviour
     public Animator animator;
     public CoinManager coinManager;
     public KeysManager keysManager;
+    public HeartManager heartManager;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -64,21 +65,7 @@ public class PlayerMovement2D : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             collision.gameObject.SetActive(false);
-        }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Coin"))
-        {
-            coinManager.AddCoins(1);
-            collision.gameObject.SetActive(false);
-        }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("SilverKey"))
-        {
-            keysManager.AddSilverKey(1);
-            collision.gameObject.SetActive(false);
-        }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("GoldKey"))
-        {
-            keysManager.AddGoldKey(1);
-            collision.gameObject.SetActive(false);
+            heartManager.TakeDamage();
         }
     }
 
@@ -87,6 +74,24 @@ public class PlayerMovement2D : MonoBehaviour
         if (!Physics2D.OverlapCircle(groundCheck.position, 0.1f, whatIsGround))
         {
             isGrounded = false;
+        }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Coin"))
+        {
+            coinManager.AddCoins(1);
+            other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("SilverKey"))
+        {
+            keysManager.AddSilverKey(1);
+            other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("GoldKey"))
+        {
+            keysManager.AddGoldKey(1);
+            other.gameObject.SetActive(false);
         }
     }
 }
