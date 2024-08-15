@@ -36,6 +36,7 @@ public class CharacterSelection : MonoBehaviour
             }
 
             activeCharacter = Instantiate(characterPrefabs[selectedCharacterIndex], transform.position, transform.rotation);
+            activeCharacter.SetActive(true);
         }
     }
 }
