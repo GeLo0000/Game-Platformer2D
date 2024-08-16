@@ -57,7 +57,7 @@ public class PlayerMovement2D : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (Physics2D.OverlapCircle(groundCheck.position, 0.1f, whatIsGround))
+        if (Physics2D.OverlapCircle(groundCheck.position, 0.9f, whatIsGround))
         {
             isGrounded = true;
             animator.SetBool("IsJumping", false);

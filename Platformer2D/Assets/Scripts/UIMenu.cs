@@ -5,10 +5,7 @@ using UnityEngine;
 public class UIMenu : MonoBehaviour
 {
     public GameObject menuPanel;
-    void Update()
-    {
-        
-    }
+
     public void Pause()
     {
         menuPanel.SetActive(true);

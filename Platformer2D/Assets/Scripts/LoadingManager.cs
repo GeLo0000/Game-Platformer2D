@@ -7,6 +7,7 @@ public class LoadingManager : MonoBehaviour
     public CharacterSelection characterSelection;
     public ChangeScenes changeScenes;
     public GameObject loading;
+    public GameObject buttonCanvas;
     private float animationDuration = 3f;
     
     public void StartLoading(int scene)
@@ -18,12 +19,11 @@ public class LoadingManager : MonoBehaviour
     {
         characterSelection.activeCharacter.GetComponent<Animator>().SetBool("IsLoading", true);
         loading.SetActive(true);
+        buttonCanvas.SetActive(false);
 
         yield return new WaitForSeconds(animationDuration);
 
         characterSelection.activeCharacter.GetComponent<Animator>().SetBool("IsLoading", false);
-
-        loading.SetActive(false);
 
         changeScenes.ChangeScene(scene);
     }
