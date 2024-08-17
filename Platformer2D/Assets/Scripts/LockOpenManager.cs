@@ -13,6 +13,13 @@ public class LockOpenManager : MonoBehaviour
 
     private bool isOpened;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start()
     {
         isOpened = PlayerPrefs.GetInt(nameObject, 0) == 1;
@@ -33,6 +40,7 @@ public class LockOpenManager : MonoBehaviour
             {
                 CloseOpenButtons();
                 keysManager.SpendGoldKey(1);
+                audioManager.PlaySFX(audioManager.buttonKyesOpenClick);
             }
         }
         else
@@ -41,6 +49,7 @@ public class LockOpenManager : MonoBehaviour
             {
                 CloseOpenButtons();
                 keysManager.SpendSilverKey(1);
+                audioManager.PlaySFX(audioManager.buttonKyesOpenClick);
             }
         }
         

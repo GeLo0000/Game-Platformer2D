@@ -11,6 +11,13 @@ public class PurchaseManager : MonoBehaviour
 
     private bool isPurchased;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start()
     {
         isPurchased = PlayerPrefs.GetInt("IsCharacterPurchased", 0) == 1;
@@ -27,6 +34,7 @@ public class PurchaseManager : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("CoinCount", 0) >= 9)
         {
+            audioManager.PlaySFX(audioManager.buttonCoinsBuyClick);
             lockObject.SetActive(false);
             purchaseButton.SetActive(false);
             ButtonForOpen.SetActive(true);

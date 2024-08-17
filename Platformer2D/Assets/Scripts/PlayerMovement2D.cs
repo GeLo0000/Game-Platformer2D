@@ -18,6 +18,13 @@ public class PlayerMovement2D : MonoBehaviour
     private bool isGrounded;
     private bool facingRight = true;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -44,6 +51,7 @@ public class PlayerMovement2D : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             animator.SetBool("IsJumping", true);
+            audioManager.PlaySFX(audioManager.jump);
         }
     }
 
@@ -80,16 +88,19 @@ public class PlayerMovement2D : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Coin"))
         {
+            audioManager.PlaySFX(audioManager.coinsGet);
             coinManager.AddCoins(1);
             other.gameObject.SetActive(false);
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("SilverKey"))
         {
+            audioManager.PlaySFX(audioManager.keysGet);
             keysManager.AddSilverKey(1);
             other.gameObject.SetActive(false);
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("GoldKey"))
         {
+            audioManager.PlaySFX(audioManager.keysGet);
             keysManager.AddGoldKey(1);
             other.gameObject.SetActive(false);
         }

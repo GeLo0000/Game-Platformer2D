@@ -9,7 +9,7 @@ public class LoadingManager : MonoBehaviour
     public GameObject loading;
     public GameObject buttonCanvas;
     private float animationDuration = 3f;
-    
+
     public void StartLoading(int scene)
     {
         StartCoroutine(PlayAnimationAndChangeScene(scene));
