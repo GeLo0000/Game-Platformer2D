@@ -34,6 +34,7 @@ public class PlayerMovement2D : MonoBehaviour
     {
         float moveInput = Input.GetAxis("Horizontal");
         Movement(moveInput);
+        CheckGrounded();
     }
 
     void Movement(float moveInput)
@@ -55,6 +56,21 @@ public class PlayerMovement2D : MonoBehaviour
         }
     }
 
+    void CheckGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, whatIsGround);
+        if (hit.collider != null)
+        {
+            isGrounded = true;
+            animator.SetBool("IsJumping", false);
+        }
+        else
+        {
+            isGrounded = false;
+            animator.SetBool("IsJumping", true);
+        }
+    }
+
     void Flip()
     {
         facingRight = !facingRight;
@@ -65,11 +81,6 @@ public class PlayerMovement2D : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (Physics2D.OverlapCircle(groundCheck.position, 0.7f, whatIsGround))
-        {
-            isGrounded = true;
-            animator.SetBool("IsJumping", false);
-        }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             collision.gameObject.SetActive(false);
@@ -77,13 +88,6 @@ public class PlayerMovement2D : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D()
-    {
-        if (!Physics2D.OverlapCircle(groundCheck.position, 0.1f, whatIsGround))
-        {
-            isGrounded = false;
-        }
-    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Coin"))
