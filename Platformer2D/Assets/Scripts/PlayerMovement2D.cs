@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement2D : MonoBehaviour
 {
+    PlayerControls controls;
+
     public float moveSpeed = 10f;
     public float jumpForce = 20f;
 
@@ -20,9 +22,20 @@ public class PlayerMovement2D : MonoBehaviour
 
     AudioManager audioManager;
 
+    float moveInput;
+
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        controls = new PlayerControls();
+        controls.Enable();
+
+        controls.Player.Move.performed += ctx =>
+        {
+            moveInput = ctx.ReadValue<float>();
+        };
+
+        controls.Player.Jump.performed += ctx => Jump();
     }
 
     void Start()
@@ -32,12 +45,21 @@ public class PlayerMovement2D : MonoBehaviour
 
     void Update()
     {
-        float moveInput = Input.GetAxis("Horizontal");
-        Movement(moveInput);
+        Movement();
         CheckGrounded();
     }
 
-    void Movement(float moveInput)
+    void Jump()
+    {
+        if (isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            animator.SetBool("IsJumping", true);
+            audioManager.PlaySFX(audioManager.jump);
+        }
+    }
+
+    void Movement()
     {
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
@@ -46,13 +68,6 @@ public class PlayerMovement2D : MonoBehaviour
         if (moveInput > 0 && !facingRight || moveInput < 0 && facingRight)
         {
             Flip();
-        }
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            animator.SetBool("IsJumping", true);
-            audioManager.PlaySFX(audioManager.jump);
         }
     }
 
