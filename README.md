@@ -50,7 +50,7 @@ The game takes players through various challenges as they navigate different lev
 
 ## Download & Gameplay
 
-- **Download the Game (Android APK)**: [Download 2D Platformer for Android](https://drive.google.com/file/d/13VlRyxdTJRCxJTXDAv0q_LvUKVGv5k-8/view?usp=sharing)
+- **Download the Game (Android APK)**: [Download 2D Platformer for Android](https://drive.google.com/file/d/1WhCBZDaEM9qIYEb-J-gHzXe5zbcguk0L/view?usp=sharing)
 - **Download the Game (Windows EXE)**: [Download 2D Platformer for Windows](https://drive.google.com/file/d/1Ik0VWWwDHFRacue6sPdX7cx12LJYDomh/view?usp=sharing)
   
 - **Watch Gameplay Video (Android)**: [Watch on YouTube](https://youtu.be/o3zh6XtWsvg)
